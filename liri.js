@@ -1,4 +1,6 @@
 
+var argv = process.argv[2]
+
 //Twitter
 if (process.argv[2] == "my-tweets"){
 myTweets();
@@ -19,13 +21,14 @@ OMDB();
 
 //Random.txt
 if (process.argv[2] == "do-what-it-says") {
+
 doWhat();
 
 }	
 
 
 
-
+//twitter
 function myTweets(){
 
 var Twitter = require('twitter');
@@ -49,7 +52,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
 }
 
 
-
+//spotify
 function spotifySearch(){
 
 var Spotify = require('node-spotify-api');
@@ -103,7 +106,7 @@ spotify.search({ type: 'track', query: songName, limit: 1 }, function(err, data)
 
 
 
-
+//OMDB
 function OMDB(){
 var request = require("request");
 
@@ -158,43 +161,28 @@ request(queryUrl, function(error, response, body) {
 }
 
 
-
-
-
-
-
-
-
-
+//do-what-it-says
+//can read random.txt, but can't figure out how to get it run application reading the text in random.txt
 function doWhat(){
 
-var randomOne = process.argv[2];
 
 var fs = require("fs");
 
-// Running the readFile module that's inside of fs.
-// Stores the read information into the variable "data"
 fs.readFile("random.txt", "utf8", function(err, data) {
   
   if (err) {
     return console.log(err);
   }
  
-  // Break the string down by comma separation and store the contents into the output array.
   var output = data.split(",");
 
-  // Loop Through the newly created output array
   for (var i = 0; i < output.length; i++) {
-
-    // Print each element (item) of the array
     console.log(output[i]);
+
   }
 });
 
 }
-
-//push string to process.argv[2] to run command from random.txt
-//make spotift track input search strict and not by keyword
 
 
 
